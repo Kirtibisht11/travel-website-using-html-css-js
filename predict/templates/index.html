@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <iframe src="bot.html" title="Chatbot" width="300" height="500" alt="StockPal Chatbot"></iframe>
+
+    <!-- Stock Price Prediction Section -->
+    <div class="container">
+        <h1>Stock Price Prediction</h1>
+        <div class="text-center mb-4">
+            <img src="images/stock_logo.svg" alt="Stock Logo" width="150" class="rounded-circle">
+
+        </div>
+        <form method="POST" id="prediction-form" action="/submit-prediction">
+
+            <div class="form-group">
+                <label for="ticker">Select Stock Ticker</label>
+                <select name="ticker" id="ticker" class="form-control" required>
+                    <option value="AAPL">AAPL - Apple</option>
+                    <option value="GOOG">GOOG - Google</option>
+                    <option value="AMZN">AMZN</option>
+                    <option value="MSFT">MSFT</option>
+                    <option value="TSLA">TSLA</option>
+                    <option value="NFLX">NFLX</option>
+                    <option value="FB">FB</option>
+                    <option value="NVDA">NVDA</option>
+                    <option value="INTC">INTC</option>
+                    <option value="IBM">IBM</option>
+                    <!-- Additional options can be added dynamically -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="prediction_days">Prediction Duration (Days)</label>
+                <input type="number" id="prediction_days" name="prediction_days" class="form-control" required min="1" max="365">
+            </div>
+            <div class="form-group">
+                <label for="model_choice">Choose Prediction Model</label>
+                <select name="model_choice" id="model_choice" class="form-control" required>
+                    <option value="LSTM">LSTM</option>
+                    <option value="ARIMA">ARIMA</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+        <div class="loading-spinner" id="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Developed by <strong>Kirti Bisht</strong> | <a href="https://www.linkedin.com/in/kirti-bisht-k0805b">Contact</a></p>
+        </div>
+    </div>
+
+
+</body>
+</html>

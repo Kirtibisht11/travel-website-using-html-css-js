@@ -1,0 +1,248 @@
+<style>
+        /* General body styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav.a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav.a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chatbot container */
+        #chatbox-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        #bot-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        #chat-body {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        #chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-message {
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #d1f7c4;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #e1e1e1;
+            margin-right: auto;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        #send-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #send-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Stock prediction form */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0d6efd;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control, .btn {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            width: 150px;
+            border-radius: 50%;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">StockPredict</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Stock Predictions</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Predict Your Stock’s Future with AI-powered Insights</h1>
+        <p>Get accurate stock predictions and trends based on real-time data and machine learning.</p>
+        <button id="getStarted">Get Started</button>
+    </section>
+    
+    <!-- Stock Price Prediction Section -->
+    <div class="container">
+        <h1>Stock Price Prediction</h1>
+        <div class="image-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Amazon.com.svg" alt="Stock Logo">
+        </div>
+
+        <form method="POST">
+            <div class="form-group mb-3">
+                <label for="ticker">Select Stock Ticker</label>
+                <select name="ticker" id="ticker" class="form-control" required>
+                    <option value="AAPL">AAPL</option>
+                    <option value="GOOG">GOOG</option>
+                    <option value="AMZN">AMZN</option>
+                    <option value="MSFT">MSFT</option>
+                    <option value="TSLA">TSLA</option>
+                    <option value="NFLX">NFLX</option>
+                    <option value="FB">FB</option>
+                    <option value="NVDA">NVDA</option>
+                    <option value="INTC">INTC</option>
+                    <option value="IBM">IBM</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="prediction_days">Prediction Duration (Days)</label>
+                <input type="number" id="prediction_days" name="prediction_days" class="form-control" required min="1" max="365">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="model_choice">Choose Prediction Model</label>
+                <select name="model_choice" id="model_choice" class="form-control" required>
+                    <option value="LSTM">LSTM</option>
+                    <option value="ARIMA">ARIMA</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+    </div>
+
+    <!-- Chatbot UI -->
+    <div id="chatbox-container">
+        <div id="chat-header">
+            <div id="bot-icon">🤖</div>
+            <div id="bot-name">StockPal</div>
+        </div>
+        <div id="chat-body"></div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Ask me anything...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Developed by <strong>Kirti Bisht</strong> | <a href="https://www.linkedin.com/in/kirti-bisht-k0805b/">Contact</a></p>
+    </div>

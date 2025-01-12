@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">StockPredict</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Stock Predictions</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Predict Your Stock’s Future with AI-powered Insights</h1>
+        <p>Get accurate stock predictions and trends based on real-time data and machine learning.</p>
+        <button id="getStarted">Get Started</button>
+    </section>
+
+    <!-- Stock Prediction Input Area -->
+    <section class="stock-prediction">
+        <h2>Stock Prediction</h2>
+        <form id="predictionForm">
+            <div class="input-group">
+                <label for="stockSymbol">Enter Stock Symbol:</label>
+                <input type="text" id="stockSymbol" placeholder="e.g. AAPL" required>
+            </div>
+            <div class="input-group">
+                <label for="timePeriod">Select Prediction Period:</label>
+                <select id="timePeriod">
+                    <option value="1d">1 Day</option>
+                    <option value="1w">1 Week</option>
+                    <option value="1m">1 Month</option>
+                    <option value="1y">1 Year</option>
+                </select>
+            </div>
+            <button type="submit" id="predictBtn">Predict</button>
+        </form>
+    </section>
+
+    <!-- Prediction Results Section -->
+    <section class="prediction-results">
+        <h2>Prediction Results</h2>
+        <div id="results">
+            <p id="currentPrice">Current Price: $0.00</p>
+            <p id="predictedPrice">Predicted Price: $0.00</p>
+            <div id="stockChart">
+                <!-- Placeholder for stock chart (could be integrated with a chart library like Chart.js) -->
+                <p>Stock Price Chart will be here</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div>
+            <p>&copy; 2024 StockPredict | All Rights Reserved</p>
+        </div>
+        <div>
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+        </div>
+    </footer>
+
+    <script src="1.js"></script>
+</body>
+</html>

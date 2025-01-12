@@ -1,0 +1,55 @@
+<html>
+    <head></head>
+        <script>
+            function validateform()
+            {
+                var name=document.myform.name.value;
+                var password=document.myform.password.value;
+                var x=document.myform,email.value;
+                var at_position=x.indexOf("@");
+                var dot_position=x.lastIndexOf(" ");
+                if(name==null || name==" ")
+            {
+                alert("Name can't be blank");
+                return false;
+            }
+            else if(password.length<8)
+            {
+                alert("password must at least 8 characters");
+                return false;
+            }
+            else if(isNaN(num)){
+                document.getElementById("number").innerHTML="enter numeric value only";
+            return false;
+         }
+         else if(at_position<1 || dot_position<at_position +2 || dot_position+2>x.length)
+         {
+            alert("please enter a valid e-mail address\n"
+                at_position:" + dot_position);
+                return false;
+            )
+            else{
+                return time;
+            }
+        }
+        </script>
+        form name="myform" onsubmit="return validateform()">
+        name:<input type ="text" name="name"><br>
+        password:<input type="password" name="passowrd"><br>
+        number:<input type="text" name="email">
+        <span id="number"></span><br>
+        email:<input type="text" name="email">          
+        }
+        <br>
+        <input type="submit" value="register">
+        </body>
+        </html>
+
+
+
+
+            }
+
+        </script>
+    </head>
+</html>

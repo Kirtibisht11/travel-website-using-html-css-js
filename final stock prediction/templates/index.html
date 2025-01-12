@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #007bff; /* Blue background */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+    
+        /* Navigation Bar */
+        nav {
+            background-color: #28a745;
+            padding: 10px;
+            text-align: center;
+        }
+    
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    
+        nav a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Stock Price Prediction Form */
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .form-container h1 {
+            text-align: center;
+            color: #007bff;
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-control, .btn {
+            border-radius: 5px;
+        }
+    
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+    
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+    
+        .image-container img {
+            width: 150px;
+            border-radius: 50%;
+        }
+    
+        /* Chatbot container */
+        #chatbox-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+    
+        #chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+    
+        #bot-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    
+        #chat-body {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+    
+        #chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+    
+        .chat-message {
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+    
+        .user-message {
+            background-color: #d1f7c4;
+            margin-left: auto;
+        }
+    
+        .bot-message {
+            background-color: #e1e1e1;
+            margin-right: auto;
+        }
+    
+        #user-input {
+            flex-grow: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+    
+        #send-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+    
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            #chatbox-container {
+                bottom: 20px;
+                right: 20px;
+            }
+    
+            .form-container {
+                width: 90%;
+            }
+        }
+    </style>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="logo">StockPredict</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Stock Predictions</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Predict Your Stock’s Future with AI-powered Insights</h1>
+        <p>Get accurate stock predictions and trends based on real-time data and machine learning.</p>
+        <button id="getStarted">Get Started</button>
+    </section>
+    
+    <!-- Stock Price Prediction Section -->
+    <div class="form-container">
+        <h1>Stock Price Prediction</h1>
+        <div class="image-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Amazon.com.svg" alt="Stock Logo">
+        </div>
+    
+        <form method="POST">
+            <div class="form-group mb-3">
+                <label for="ticker">Select Stock Ticker</label>
+                <select name="ticker" id="ticker" class="form-control" required>
+                    <option value="AAPL">AAPL</option>
+                    <option value="GOOG">GOOG</option>
+                    <option value="AMZN">AMZN</option>
+                    <option value="MSFT">MSFT</option>
+                    <option value="TSLA">TSLA</option>
+                    <option value="NFLX">NFLX</option>
+                    <option value="FB">FB</option>
+                    <option value="NVDA">NVDA</option>
+                    <option value="INTC">INTC</option>
+                    <option value="IBM">IBM</option>
+                </select>
+            </div>
+    
+            <div class="form-group mb-3">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" required>
+            </div>
+    
+            <div class="form-group mb-3">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" required>
+            </div>
+    
+            <div class="form-group mb-3">
+                <label for="prediction_days">Prediction Duration (Days)</label>
+                <input type="number" id="prediction_days" name="prediction_days" class="form-control" required min="1" max="365">
+            </div>
+    
+            <div class="form-group mb-3">
+                <label for="model_choice">Choose Prediction Model</label>
+                <select name="model_choice" id="model_choice" class="form-control" required>
+                    <option value="LSTM">LSTM</option>
+                    <option value="ARIMA">ARIMA</option>
+                </select>
+            </div>
+    
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+    </div>
+    
+    <!-- Chatbot UI -->
+    <div id="chatbox-container">
+        <div id="chat-header">
+            <div id="bot-icon">🤖</div>
+            <div id="bot-name">StockPal</div>
+        </div>
+        <div id="chat-body"></div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Ask me anything...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Developed by <strong>Kirti Bisht</strong> | <a href="https://www.linkedin.com/in/kirti-bisht-k0805b/">Contact</a></p>
+    </div>
+    
+    <!-- Bootstrap and Chatbot Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add the chatbot interaction and prediction result script here, as in your original code
+    
+    // Predefined financial definitions
+    const stockDefinitions = {
+        "stock split": "A stock split divides a company's existing shares into multiple shares to boost liquidity.",
+        "bear market": "A bear market is a prolonged decline in stock prices, usually 20% or more from recent highs.",
+        "dividend": "A dividend is a portion of a company's earnings distributed to shareholders.",
+        "bull market": "A bull market is a period of rising stock prices, typically 20% or more from recent lows.",
+        "market capitalization": "Market capitalization is the total value of a company's outstanding shares, calculated by multiplying the stock price by the total number of shares.",
+        "price-to-earnings ratio": "The price-to-earnings ratio (P/E ratio) measures a company's current share price relative to its per-share earnings.",
+        "ipo": "IPO stands for Initial Public Offering, where a private company offers its shares to the public for the first time.",
+        "sip": "A Systematic Investment Plan (SIP) is an investment strategy that allows investors to invest small amounts periodically in mutual funds.",
+        "stocks": "Stocks represent a share in the ownership of a company, granting rights to its earnings and assets.",
+        "blue chip stocks": "Blue chip stocks are shares in well-established companies with a history of stable earnings and reliable performance.",
+        "types of stocks": "There are several types of stocks, including common stocks, preferred stocks, growth stocks, and dividend stocks.",
+        "finance market": "The finance market encompasses various sectors such as stocks, bonds, commodities, and currencies where financial instruments are traded.",
+        "financial news": "Financial news includes reports and updates on market conditions, stock prices, mergers, acquisitions, and economic events affecting financial markets.",
+    };
+
+    // Weather API Keys
+    const weatherApis = [
+        "38fe0b478a78dcb97f4a4e7839b663be",
+        "cb92c5e8c223bfe4fe9241b8449b1cb7"
+    ];
+
+    // Helper function to append messages to the chat
+    const appendMessage = (message, type) => {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("chat-message", type === "user" ? "user-message" : "bot-message");
+        const messageText = document.createElement("p");
+        messageText.textContent = message;
+        messageDiv.appendChild(messageText);
+        document.getElementById("chat-body").appendChild(messageDiv);
+        document.getElementById("chat-body").scrollTop = document.getElementById("chat-body").scrollHeight;
+    };
+
+    // Fetch weather information
+    const fetchWeather = async (location) => {
+        appendMessage("I'm fetching the results...", "bot");
+
+        for (const apiKey of weatherApis) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&units=metric&appid=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) continue; // Try the next API key if the current one fails
+                const data = await response.json();
+                if (data.cod === 200) {
+                    const weatherDescription = data.weather[0].description;
+                    const temp = data.main.temp;
+                    const country = data.sys.country;
+                    appendMessage(`The current weather in ${location}, ${country} is ${weatherDescription} with a temperature of ${temp}°C.`, "bot");
+                    return;
+                }
+            } catch (error) {
+                console.error("Error fetching weather:", error);
+            }
+        }
+
+        appendMessage("Sorry, I couldn't fetch the weather information at the moment. Please try again later.", "bot");
+    };
+
+    // Function to extract the city from the user message
+    const extractCityFromMessage = (message) => {
+        const match = message.match(/time in ([a-zA-Z\s]+)/i) || message.match(/weather in ([a-zA-Z\s]+)/i);
+        return match ? match[1].trim() : null;
+    };
+
+    // Function to fetch the current time of a city using the TimeZoneDB API
+    const fetchCityTimeFromTimeZoneDB = async (city) => {
+        appendMessage("I'm fetching the results...", "bot");
+
+        const apiKeys = ["MB7FYAXJUMEG", "UKGBZ41USJT7"]; // Replace with your actual TimeZoneDB API keys
+
+        for (const apiKey of apiKeys) {
+            const url = `https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&by=city&city=${encodeURIComponent(city)}&format=json`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.status === "OK" && data.formatted) {
+                    appendMessage(`The current time in ${city} is ${data.formatted}.`, "bot");
+                    return;
+                }
+            } catch (error) {
+                console.error("Error fetching time:", error);
+            }
+        }
+
+        appendMessage(`Sorry, I couldn't retrieve the time for ${city}. Please try again later.`, "bot");
+    };
+
+    // Function to process user messages and get weather or time info
+    const processMessage = async (message) => {
+        appendMessage(message, "user");
+
+        const lowerCaseMessage = message.toLowerCase();
+
+        // Handle simple acknowledgments like "thanks", "okay", "done", "thank you"
+        const acknowledgments = ["thanks", "thank you", "okay", "done", "great", "perfect"];
+        if (acknowledgments.some(ack => lowerCaseMessage.includes(ack))) {
+            appendMessage("You're welcome! Let me know if you need anything else.", "bot");
+            return;
+        }
+
+        // Handle greetings
+        const greetings = ["hi", "hello", "hey"];
+        if (greetings.includes(lowerCaseMessage)) {
+            appendMessage("Hello! How can I assist you today?", "bot");
+            return;
+        }
+
+        // Handle weather queries
+        if (lowerCaseMessage.includes("weather")) {
+            const location = extractCityFromMessage(message);
+            if (location) {
+                await fetchWeather(location);
+            } else {
+                appendMessage("Please specify a location to get the weather.", "bot");
+            }
+            return;
+        }
+
+        // Handle time queries
+        if (lowerCaseMessage.includes("time")) {
+            const location = extractCityFromMessage(message);
+            if (location) {
+                await fetchCityTimeFromTimeZoneDB(location);
+            } else {
+                appendMessage("Please specify a location to get the time.", "bot");
+            }
+            return;
+        }
+
+        // Handle predefined financial definitions
+        const term = Object.keys(stockDefinitions).find(key => lowerCaseMessage.includes(key));
+        if (term) {
+            appendMessage(stockDefinitions[term], "bot");
+            return;
+        }
+
+        // Default response
+        appendMessage("Sorry, I couldn't understand your query. Please try rephrasing it.", "bot");
+    };
+
+    // Event listeners for sending messages
+    document.getElementById("send-btn").addEventListener("click", () => {
+        const message = document.getElementById("user-input").value.trim();
+        if (message) {
+            processMessage(message);
+            document.getElementById("user-input").value = "";
+        }
+    });
+
+    document.getElementById("user-input").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            const message = document.getElementById("user-input").value.trim();
+            if (message) {
+                processMessage(message);
+                document.getElementById("user-input").value = "";
+            }
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        .error-message {
+            color: red;
+        }
+        .error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <form name="myform" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required></input>
+        <span id="nameError" class="error-message"></span></br></br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required></input>
+        <span id="emailError" class="error-message"></span></br></br><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required minlength="6"></input>
+        <span id="passwordError" class="error-message"></span></br></br>
+        <label for="num">Phone Number:</label>
+        <input type="text" name="num" id="num" required pattern="[0-9]{10}"></input>
+        <span id="phoneError" class="error-message"></span></br></br>
+        <input type="submit" value="Submit"></input>
+    </form>
+    <script>
+        function validateForm() {
+            const name = document.myform.name.value.trim();
+            const email = document.myform.email.value.trim();
+            const password = document.myform.password.value.trim();
+            const num = document.myform.num.value.trim();
+            let isValid = true;
+            // Reset error messages and styles
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+            document.myform.name.classList.remove('error');
+            document.myform.email.classList.remove('error');
+            document.myform.password.classList.remove('error');
+            document.myform.num.classList.remove('error');
+            // Name validation
+            if (name === "") {
+                document.getElementById('nameError').textContent = "Name can't be blank.";
+                document.myform.name.classList.add('error');
+                isValid = false;
+            }
+            // Email validation
+            if (email === "") {
+                document.getElementById('emailError').textContent = "Email can't be blank.";
+                document.myform.email.classList.add('error');
+                isValid = false;
+            }
+            // Password validation
+            if (password.length < 6) {
+                document.getElementById('passwordError').textContent = "Password must be at least 6 characters.";
+                document.myform.password.classList.add('error');
+                isValid = false;
+            }
+            // Phone number validation
+            if (isNaN(num) || num.length !== 10) {
+                document.getElementById('phoneError').textContent = "Phone number must be numeric and 10 digits.";
+                document.myform.num.classList.add('error');
+                isValid = false;
+            }
+            return isValid;
+            }
+        </script>
+    </body>
+</html>

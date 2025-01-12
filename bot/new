@@ -1,0 +1,47 @@
+  <form method="POST">
+            <div class="form-group">
+                <label for="ticker">Select Stock Ticker</label>
+                <select name="ticker" id="ticker" class="form-control" required>
+                    <option value="AAPL">AAPL</option>
+                    <option value="GOOG">GOOG</option>
+                    <option value="AMZN">AMZN</option>
+                    <option value="MSFT">MSFT</option>
+                    <option value="TSLA">TSLA</option>
+                    <option value="NFLX">NFLX</option>
+                    <option value="FB">FB</option>
+                    <option value="NVDA">NVDA</option>
+                    <option value="INTC">INTC</option>
+                    <option value="IBM">IBM</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="prediction_days">Prediction Duration (Days)</label>
+                <input type="number" id="prediction_days" name="prediction_days" class="form-control" required min="1" max="365">
+            </div>
+            
+            <div class="form-group">
+                <label for="model_choice">Choose Prediction Model</label>
+                <select name="model_choice" id="model_choice" class="form-control" required>
+                    <option value="LSTM">LSTM</option>
+                    <option value="ARIMA">ARIMA</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+        
+        <div class="footer">
+            <p>Developed by <strong>Your Name</strong> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>

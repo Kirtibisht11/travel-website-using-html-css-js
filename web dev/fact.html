@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>factorial</title>
+        <script type="text/javascript">
+            function user_input()
+            {
+               let num=prompt("enter positive number");
+            
+            var result=factorial(num);
+             alert("factorial of" + num+"is" + result);
+            }
+
+           
+            var i;
+            var num;
+           
+            function factorial(num)
+            {
+                var fact=1;
+                for(i=1;i<=num;i++)
+            {
+                fact=fact*i;
+            }
+            return fact;
+            }
+            
+        </script>
+        <body>
+            <p>please provide the value for calculating factorial</p>
+            <button onclick="user_input()">click</button>
+    </body>
+</html>
