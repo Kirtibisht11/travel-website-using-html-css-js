@@ -1,11 +1,38 @@
 
+  header h1{
+  font-size:75px;
+  color:black;
+  font-family:'pristina';
+  position:absolute;
+  animation:scroll1 12.5s linear infinite;
+  transform:translate(0vw)
+}
+header #h2{
+  transform: translateX(-100vw);
+  animation:scroll2 12.8s linear infinite;
+  animation-delay: 3.8s;
+}
+@keyframes scroll1{
+  0%{
+    transform:translateX(-100vw);
+  }
+  100%{
+    transform:translateX(100vw);
+  }
+}
+@keyframes scroll2{
+  0%{
+    transform:translateX(-100vw);
+  }
+  100%{
+    transform:translateX(100vw);
+  }
+}
 h1{
     color:blue;
 }
 
 h2{
-  color:red;}
-
-p{
-    color:yellow;
+  color:red;
 }
+
